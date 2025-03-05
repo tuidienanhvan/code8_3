@@ -1,0 +1,107 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    background-image: radial-gradient(circle, #edc9db, #f391c3);
+}
+
+.app {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.heart {
+    perspective: 2000px;
+    width: 200px;
+    height: 200px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+
+/* Shadow */
+.heart::after {
+    content: '';
+    position: absolute;
+    border-radius: 100%;
+    left: 0%;
+    bottom: -20%;
+    width: 100%;
+    height: 30%;
+    background-color: hsla(334, 40%, 50%, 0.4);
+    filter: blur(10px);
+    transform: scale(var(--scale));
+}
+
+.heart svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.inner-wrapper {
+    width: 100%;
+    height: 100%;
+    transform: scale(var(--scale));
+    transition: 0.1s ease-out;
+}
+
+.splash {
+    width: 100%;
+    height: 100%;
+}
+
+.splash path {
+    stroke: hsl(334deg 60% 80%);
+    stroke-width: 0;
+    fill: none;
+    transform-origin: center;
+    animation-timing-function: linear;
+    animation-duration: 0.5s;
+    animation-name: splash;
+}
+
+.heart-stroke {
+    fill: none;
+    stroke: rgba(255, 255, 255, 1); /* Màu trắng */
+    stroke-width: 20px;
+    stroke-dasharray: 300 1206;
+    stroke-linecap: round;
+}
+
+.heart-layer {
+    transition: fill 0.3s ease-out;
+    fill: hsl(334deg, var(--lightness), 50%);
+    stroke: hsl(334deg, var(--lightness), 25%);
+    stroke-width: 15px;
+}
+
+.heart-shine {
+    filter: blur(3px);
+}
+
+/* Hiệu ứng nổ */
+@keyframes splash {
+    0% {
+        transform: scale(0.5);
+        stroke-width: 10;
+    }
+
+    50% {
+        transform: scale(1.5);
+        stroke-width: 100;
+    }
+
+    100% {
+        transform: scale(2.5);
+        stroke-width: 1;
+    }
+}

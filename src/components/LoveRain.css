@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Grandstander&display=swap');
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Chặn thanh cuộn */
+}
+/* Trái tim rơi */
+.love-drop {
+    position: absolute;
+    top: -10vh;
+    font-size: 20px;
+    color: rgb(255, 0, 100);
+    animation: loveFall linear infinite;
+    opacity: 0.8;
+}
+
+/* Hiệu ứng rơi mềm mại */
+@keyframes loveFall {
+    0% {
+        transform: translateY(-10vh) rotateZ(0deg);
+        opacity: 1;
+    }
+    25% {
+        transform: translateY(30vh) rotateZ(15deg);
+    }
+    50% {
+        transform: translateY(60vh) rotateZ(-15deg);
+        opacity: 0.9;
+    }
+    75% {
+        transform: translateY(90vh) rotateZ(15deg);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(110vh) rotateZ(-15deg);
+        opacity: 0;
+    }
+}
