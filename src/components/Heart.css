@@ -32,6 +32,7 @@ body {
     cursor: pointer;               /* Con trỏ chuột thành hình bàn tay khi hover */
     outline: none;                 /* Xóa viền focus mặc định của button */
     position: relative;            /* Định vị tương đối để chứa các phần tử con absolute */
+    z-index: 5;
 }
 
 /* Bóng dưới trái tim */
@@ -175,7 +176,7 @@ body {
 
 /* Áp dụng rung khi trái tim vỡ */
 body.shake {
-    animation: screenShake 1s ease; /* Chạy animation rung trong 0.5 giây */
+    animation: screenShake 1s ease; /* Chạy animation rung trong 1 giây */
     -webkit-backface-visibility: hidden; /* Tối ưu cho Safari/iOS, tránh nhấp nháy */
     -webkit-transform: translateZ(0); /* Kích hoạt hardware acceleration trên iOS */
     backface-visibility: hidden;    /* Tối ưu chung, tránh nhấp nháy */

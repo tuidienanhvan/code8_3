@@ -2,8 +2,9 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  flex-direction: column; /* Xếp dọc: chữ trên, trái tim dưới */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative; /* Để chứa các phần tử absolute như .message */
 }

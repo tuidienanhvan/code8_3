@@ -7,13 +7,16 @@
   font-weight: 500;
   font-style: normal;
   text-align: center;
-  margin-bottom: 500px;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
-  position: relative;
+  position: absolute;
+  top: 20%; /* Cách đỉnh 20% chiều cao viewport */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
   z-index: 10;
-  opacity: 1; /* Bắt đầu rõ, để JSX xử lý typing */
-  white-space: nowrap; /* Giữ chữ trên một dòng */
-  overflow: hidden; /* Ngăn tràn chữ */
+  opacity: 1;
+  white-space: normal;
+  overflow: hidden;
 }
 
 /* Con trỏ nhấp nháy */
@@ -36,10 +39,29 @@
   transition: text-shadow 0.2s ease-in-out, letter-spacing 0.2s ease-in-out;
 }
 
+/* Tablet và điện thoại lớn (dưới 768px) */
 @media (max-width: 768px) {
   .message {
-    font-size: 24px;
-    margin-bottom: 15px;
+    font-size: 20px;
+    top: 15%; /* Giảm xuống 15% để gần Heart hơn một chút */
+  }
+}
+
+/* Điện thoại nhỏ (dưới 480px) */
+@media (max-width: 480px) {
+  .message {
+    font-size: 16px;
+    white-space: normal;
+    max-width: 90%;
+    top: 10%; /* Giảm xuống 10% để tránh chồng lấn Heart */
+  }
+}
+
+/* Điện thoại siêu nhỏ (dưới 360px) */
+@media (max-width: 360px) {
+  .message {
+    font-size: 14px;
+    top: 8%; /* Giảm thêm để vừa màn nhỏ */
   }
 }
 
@@ -50,10 +72,10 @@
 @keyframes fadeOutSlide {
   from {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0); /* Thêm translateX để đồng bộ với trạng thái ban đầu */
   }
   to {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateX(-50%) translateY(20px); /* Tăng từ 10px lên 20px cho rõ hơn */
   }
 }

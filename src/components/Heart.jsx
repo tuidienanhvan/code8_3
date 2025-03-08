@@ -155,7 +155,7 @@ const Heart = ({ love, setLove, onPrevLoveChange }) => {
         setTimeout(() => {
           document.body.classList.remove("shake");
         }, 1000);
-      }, 500);
+      }, 800);
       return () => clearTimeout(timeoutId);
     } else if (love > 0) {
       setIsBroken(false);
