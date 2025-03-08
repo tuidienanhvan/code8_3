@@ -7,7 +7,16 @@ body {
     padding: 0;
     overflow: hidden; /* Chặn thanh cuộn */
 }
-/* Trái tim rơi */
+
+#love-rain-container {
+    position: absolute; /* Đặt vị trí tuyệt đối để không chiếm không gian trong grid */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Cho phép nhấp xuyên qua container đến Heart */
+}
+
 .love-drop {
     position: absolute;
     top: -10vh;
@@ -17,7 +26,6 @@ body {
     opacity: 0.8;
 }
 
-/* Hiệu ứng rơi mềm mại */
 @keyframes loveFall {
     0% {
         transform: translateY(-10vh) rotateZ(0deg);

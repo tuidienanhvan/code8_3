@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+.message {
+  font-family: "Chakra Petch", "Arial", sans-serif;
+  font-size: 28px;
+  color: #fff;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  margin-bottom: 500px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+  position: relative;
+  z-index: 10;
+  opacity: 1; /* Bắt đầu rõ, để JSX xử lý typing */
+  white-space: nowrap; /* Giữ chữ trên một dòng */
+  overflow: hidden; /* Ngăn tràn chữ */
+}
+
+/* Con trỏ nhấp nháy */
+.message::after {
+  content: "|";
+  display: inline-block;
+  animation: blink 0.7s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.message:hover {
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.5px;
+  transition: text-shadow 0.2s ease-in-out, letter-spacing 0.2s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .message {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+}
+
+.message-exit {
+  animation: fadeOutSlide 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeOutSlide {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
