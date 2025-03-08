@@ -41,7 +41,7 @@ body {
     position: absolute;            /* Định vị tuyệt đối so với .heart */
     border-radius: 100%;           /* Hình elip (tròn) */
     left: 0%;                      /* Căn trái so với .heart */
-    bottom: -20%;                  /* Đặt phía dưới .heart, cách 20% chiều cao */
+    bottom: -30%;                  /* Đặt phía dưới .heart, cách 20% chiều cao */
     width: 100%;                   /* Chiều rộng bằng 100% của .heart */
     height: 30%;                   /* Chiều cao là 30% của .heart */
     background-color: var(--shadow-color, hsla(334, 40%, 50%, 0.4)); /* Màu bóng, mặc định là hồng nhạt mờ */

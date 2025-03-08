@@ -9,14 +9,28 @@
   text-align: center;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
   position: absolute;
-  top: 20%; /* Cách đỉnh 20% chiều cao viewport */
+  top: 20%;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
   z-index: 10;
   opacity: 1;
   white-space: normal;
-  overflow: hidden;
+  overflow: visible;
+  padding-bottom: 20px;
+}
+
+/* Kiểu dáng đặc biệt cho thông điệp tình yêu */
+.message-love {
+  font-size: 36px;
+  font-weight: 700;
+  color: #ff69b4; /* Màu chính của chữ (hồng phấn) */
+  -webkit-text-stroke: 1.5px #fff; /* Thêm stroke trắng, độ dày 1.5px */
+  text-shadow: 
+    0 0 10px rgba(255, 105, 180, 0.8),
+    0 0 20px rgba(255, 105, 180, 0.6),
+    2px 2px 6px rgba(0, 0, 0, 0.7);
+  animation: glow 1.5s ease-in-out infinite;
 }
 
 /* Con trỏ nhấp nháy */
@@ -33,35 +47,59 @@
   }
 }
 
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px rgba(255, 105, 180, 0.8),
+      0 0 20px rgba(255, 105, 180, 0.6),
+      2px 2px 6px rgba(0, 0, 0, 0.7);
+  }
+  50% {
+    text-shadow: 
+      0 0 20px rgba(255, 105, 180, 1),
+      0 0 30px rgba(255, 105, 180, 0.8),
+      2px 2px 6px rgba(0, 0, 0, 0.7);
+  }
+}
+
 .message:hover {
   text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.4);
   letter-spacing: 0.5px;
   transition: text-shadow 0.2s ease-in-out, letter-spacing 0.2s ease-in-out;
 }
 
-/* Tablet và điện thoại lớn (dưới 768px) */
 @media (max-width: 768px) {
   .message {
     font-size: 20px;
-    top: 15%; /* Giảm xuống 15% để gần Heart hơn một chút */
+    top: 15%;
+  }
+  .message-love {
+    font-size: 28px;
+    -webkit-text-stroke: 1px #fff; /* Giảm độ dày stroke cho màn nhỏ */
   }
 }
 
-/* Điện thoại nhỏ (dưới 480px) */
 @media (max-width: 480px) {
   .message {
     font-size: 16px;
     white-space: normal;
     max-width: 90%;
-    top: 10%; /* Giảm xuống 10% để tránh chồng lấn Heart */
+    top: 10%;
+  }
+  .message-love {
+    font-size: 20px;
+    -webkit-text-stroke: 0.8px #fff; /* Giảm thêm cho màn nhỏ hơn */
   }
 }
 
-/* Điện thoại siêu nhỏ (dưới 360px) */
 @media (max-width: 360px) {
   .message {
     font-size: 14px;
-    top: 8%; /* Giảm thêm để vừa màn nhỏ */
+    top: 8%;
+  }
+  .message-love {
+    font-size: 18px;
+    -webkit-text-stroke: 0.6px #fff; /* Giảm thêm cho màn siêu nhỏ */
   }
 }
 
@@ -72,10 +110,10 @@
 @keyframes fadeOutSlide {
   from {
     opacity: 1;
-    transform: translateX(-50%) translateY(0); /* Thêm translateX để đồng bộ với trạng thái ban đầu */
+    transform: translateX(-50%) translateY(0);
   }
   to {
     opacity: 0;
-    transform: translateX(-50%) translateY(20px); /* Tăng từ 10px lên 20px cho rõ hơn */
+    transform: translateX(-50%) translateY(20px);
   }
 }
