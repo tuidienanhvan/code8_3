@@ -33,6 +33,9 @@ body {
     outline: none;                 /* Xóa viền focus mặc định của button */
     position: relative;            /* Định vị tương đối để chứa các phần tử con absolute */
     z-index: 5;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
 }
 
 /* Bóng dưới trái tim */
