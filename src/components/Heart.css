@@ -1,187 +1,399 @@
-/* Thiết lập cơ bản cho body */
 body {
-    width: 100vw;                  /* Chiều rộng bằng 100% chiều rộng viewport */
-    height: 100vh;                 /* Chiều cao bằng 100% chiều cao viewport */
-    font-family: 'Montserrat', sans-serif; /* Sử dụng font Montserrat, fallback là sans-serif */
-    margin: 0;                     /* Xóa margin mặc định của body */
-    padding: 0;                    /* Xóa padding mặc định của body */
-    overflow: hidden;              /* Ẩn thanh cuộn, ngăn nội dung tràn ra ngoài */
-    transition: background-image 0.5s ease; /* Hiệu ứng chuyển đổi mượt mà cho background-image trong 0.5 giây */
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transition: background-image 0.5s ease;
+  transform-origin: center;
 }
 
-/* Container chính chứa trái tim */
-.app {
-    width: 100vw;                  /* Chiều rộng bằng 100% viewport */
-    height: 100vh;                 /* Chiều cao bằng 100% viewport */
-    display: grid;                 /* Sử dụng grid để căn giữa nội dung */
-    align-items: center;           /* Căn giữa theo chiều dọc */
-    justify-content: center;       /* Căn giữa theo chiều ngang */
-}
-
-/* Button trái tim */
 .heart {
-    perspective: 2000px;           /* Tạo không gian 3D cho các hiệu ứng xoay */
-    width: 50vw;                   /* Chiều rộng mặc định là 50% viewport width */
-    height: 50vw;                  /* Chiều cao mặc định là 50% viewport width */
-    max-width: 200px;              /* Giới hạn chiều rộng tối đa là 200px */
-    max-height: 200px;             /* Giới hạn chiều cao tối đa là 200px */
-    min-width: 100px;              /* Chiều rộng tối thiểu là 100px */
-    min-height: 100px;             /* Chiều cao tối thiểu là 100px */
-    border: none;                  /* Xóa viền mặc định của button */
-    background: none;              /* Xóa nền mặc định của button */
-    cursor: pointer;               /* Con trỏ chuột thành hình bàn tay khi hover */
-    outline: none;                 /* Xóa viền focus mặc định của button */
-    position: relative;            /* Định vị tương đối để chứa các phần tử con absolute */
-    z-index: 5;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    user-select: none;
+  perspective: 2000px;
+  width: 50vw;
+  height: 50vw;
+  max-width: 200px;
+  max-height: 200px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  z-index: 5;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.5s ease;
 }
 
-/* Bóng dưới trái tim */
+.heart.broken {
+  pointer-events: none;
+  opacity: 0;
+  cursor: default;
+}
+
+.heart:disabled {
+  cursor: default;
+}
+
 .heart::after {
-    content: '';                   /* Tạo một pseudo-element rỗng */
-    position: absolute;            /* Định vị tuyệt đối so với .heart */
-    border-radius: 100%;           /* Hình elip (tròn) */
-    left: 0%;                      /* Căn trái so với .heart */
-    bottom: -30%;                  /* Đặt phía dưới .heart, cách 20% chiều cao */
-    width: 100%;                   /* Chiều rộng bằng 100% của .heart */
-    height: 30%;                   /* Chiều cao là 30% của .heart */
-    background-color: var(--shadow-color, hsla(334, 40%, 50%, 0.4)); /* Màu bóng, mặc định là hồng nhạt mờ */
-    filter: blur(10px);            /* Làm mờ bóng với bán kính 10px */
-    transform: scale(var(--scale)); /* Thu phóng bóng dựa trên biến --scale */
-    transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi màu bóng trong 0.3 giây */
+  content: '';
+  position: absolute;
+  border-radius: 100%;
+  left: 0%;
+  bottom: -30%;
+  width: 100%;
+  height: 30%;
+  background-color: var(--shadow-color, hsla(334, 40%, 50%, 0.4));
+  filter: blur(10px);
+  transform: scale(var(--scale));
+  transition: background-color 0.3s ease;
 }
 
-/* SVG bên trong trái tim */
+.heart:not(.broken)::after {
+  content: '';
+  position: absolute;
+  border-radius: 100%;
+  left: 0%;
+  bottom: -30%;
+  width: 100%;
+  height: 30%;
+  background-color: var(--shadow-color, hsla(334, 40%, 50%, 0.4));
+  filter: blur(10px);
+  transform: scale(var(--scale));
+  transition: background-color 0.3s ease;
+}
+
+.heart.broken::after {
+  opacity: 0;
+  transition: opacity 3s ease;
+}
+
 .heart svg {
-    position: absolute;            /* Định vị tuyệt đối so với .heart */
-    top: 0;                        /* Căn đỉnh SVG vào đỉnh của .heart */
-    left: 0;                       /* Căn trái SVG vào trái của .heart */
-    width: 100%;                   /* Chiều rộng bằng 100% của .heart */
-    height: 100%;                  /* Chiều cao bằng 100% của .heart */
-    overflow: visible;             /* Cho phép nội dung SVG (như stroke) vượt ra ngoài mà không bị cắt */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
-/* Wrapper bên trong chứa các lớp của trái tim */
 .inner-wrapper {
-    width: 100%;                   /* Chiều rộng bằng 100% của .heart */
-    height: 100%;                  /* Chiều cao bằng 100% của .heart */
-    transform: scale(var(--scale)); /* Thu phóng dựa trên biến --scale */
-    transition: 0.1s ease-out;     /* Hiệu ứng chuyển đổi mượt mà trong 0.1 giây khi scale thay đổi */
+  width: 100%;
+  height: 100%;
+  transform: scale(var(--scale));
+  transition: 0.1s ease-out;
+  transform-style: preserve-3d;
 }
 
-/* SVG hiệu ứng splash */
 .splash {
-    width: 100%;                   /* Chiều rộng bằng 100% của .inner-wrapper */
-    height: 100%;                  /* Chiều cao bằng 100% của .inner-wrapper */
+  width: 100%;
+  height: 100%;
 }
 
-/* Đường path trong splash */
 .splash path {
-    stroke: hsl(334deg 60% 80%);   /* Màu viền hồng nhạt */
-    stroke-width: 0;               /* Độ dày viền ban đầu là 0 */
-    fill: none;                    /* Không tô màu bên trong */
-    transform-origin: center;      /* Điểm gốc của transform là trung tâm */
-    animation-timing-function: linear; /* Tốc độ animation đều */
-    animation-duration: 0.5s;      /* Thời gian animation là 0.5 giây */
-    animation-name: splash;        /* Tên animation là splash */
+  stroke: hsl(334deg, 60%, 80%);
+  stroke-width: 0;
+  fill: none;
+  transform-origin: center;
+  animation-timing-function: linear;
+  animation-duration: 0.5s;
+  animation-name: splash;
 }
 
-/* Lớp viền chính của trái tim */
-.heart-stroke {
-    fill: none;                    /* Không tô màu bên trong */
-    stroke: var(--heart-stroke-color, rgba(255, 255, 255, 1)); /* Màu viền, mặc định là trắng */
-    stroke-width: 20px;            /* Độ dày viền là 20px */
-    stroke-dasharray: 300 1206;    /* Tạo đường nét đứt với khoảng cách 300px hiển thị, 1206px ẩn */
-    stroke-linecap: round;         /* Đầu viền bo tròn */
-    transition: stroke 0.3s ease;  /* Hiệu ứng chuyển đổi màu viền trong 0.3 giây */
-}
-
-/* Lớp nền của trái tim */
-.heart-layer {
-    transition: fill 0.3s ease-out, stroke 0.3s ease-out; /* Chuyển đổi màu nền và viền trong 0.3 giây */
-    fill: var(--heart-fill-color, hsl(334deg, var(--lightness), 50%)); /* Màu nền, mặc định là hồng */
-    stroke: var(--heart-stroke-dark, hsl(334deg, var(--lightness), 25%)); /* Màu viền, mặc định là hồng đậm */
-    stroke-width: 15px;            /* Độ dày viền là 15px */
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3)); /* Thêm bóng 3D với offset 2px và mờ 4px */
-}
-
-/* Lớp sáng bóng của trái tim */
-.heart-shine {
-    filter: blur(3px);             /* Làm mờ nhẹ với bán kính 3px để tạo hiệu ứng sáng */
-}
-
-/* Animation cho hiệu ứng splash */
 @keyframes splash {
-    0% {
-        transform: scale(0.5);     /* Thu nhỏ 50% */
-        stroke-width: 10;          /* Độ dày viền là 10px */
-    }
-    50% {
-        transform: scale(1.5);     /* Phóng to 150% */
-        stroke-width: 100;         /* Độ dày viền tăng lên 100px */
-    }
-    100% {
-        transform: scale(2.5);     /* Phóng to 250% */
-        stroke-width: 1;           /* Độ dày viền giảm về 1px */
-    }
+  0% { transform: scale(0.5); stroke-width: 10; }
+  50% { transform: scale(1.5); stroke-width: 100; }
+  100% { transform: scale(2.5); stroke-width: 1; }
 }
 
-/* Khi trái tim vỡ */
+.heart-stroke {
+  fill: none;
+  stroke: var(--heart-stroke-color, rgba(255, 255, 255, 1));
+  stroke-width: 20px;
+  stroke-dasharray: 300 1206;
+  stroke-linecap: round;
+  transition: stroke 0.3s ease;
+}
+
+.heart-layer {
+  transition: fill 0.3s ease-out;
+  fill: var(--heart-fill-color, hsl(334deg, var(--lightness), 50%));
+  stroke: var(--heart-stroke-dark, hsl(334deg, var(--lightness), 25%));
+  stroke-width: 15px;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.heart-shine {
+  filter: blur(3px);
+}
+
 .heart.broken .inner-wrapper {
-    position: relative;            /* Định vị tương đối để chứa các mảnh vỡ absolute */
-    width: 100%;                   /* Giữ chiều rộng 100% */
-    height: 100%;                  /* Giữ chiều cao 100% */
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+  transform-style: preserve-3d;
 }
 
-/* Mỗi mảnh vỡ của trái tim */
+@keyframes phase1Shake {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2px, -1px); }
+  20% { transform: translate(2px, 1px); }
+  30% { transform: translate(-1px, 2px); }
+  40% { transform: translate(1px, -2px); }
+  50% { transform: translate(-2px, 1px); }
+  60% { transform: translate(2px, -1px); }
+  70% { transform: translate(-1px, -2px); }
+  80% { transform: translate(1px, 2px); }
+  90% { transform: translate(0, 0); }
+}
+
+body.phase1-shake {
+  animation: phase1Shake 0.5s ease-in-out infinite;
+}
+
+@keyframes phase2Shake {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  10% { transform: translate(-4px, -2px) rotate(-1deg); }
+  20% { transform: translate(4px, 2px) rotate(1deg); }
+  30% { transform: translate(-3px, 3px) rotate(-2deg); }
+  40% { transform: translate(3px, -3px) rotate(2deg); }
+  50% { transform: translate(-5px, 2px) rotate(-3deg); }
+  60% { transform: translate(5px, -2px) rotate(3deg); }
+  70% { transform: translate(-3px, -4px) rotate(-1deg); }
+  80% { transform: translate(3px, 4px) rotate(1deg); }
+  90% { transform: translate(0, 0) rotate(0); }
+}
+
+body.phase2-shake {
+  animation: phase2Shake 0.4s ease-in-out infinite;
+  animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+@keyframes phase3Shake {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  10% { transform: translate(-8px, -4px) rotate(-3deg); }
+  20% { transform: translate(8px, 4px) rotate(3deg); }
+  30% { transform: translate(-6px, 6px) rotate(-5deg); }
+  40% { transform: translate(6px, -6px) rotate(5deg); }
+  50% { transform: translate(-10px, 5px) rotate(-7deg); }
+  60% { transform: translate(10px, -5px) rotate(7deg); }
+  70% { transform: translate(-7px, -8px) rotate(-4deg); }
+  80% { transform: translate(7px, 8px) rotate(4deg); }
+  90% { transform: translate(0, 0) rotate(0); }
+}
+
+body.phase3-shake {
+  animation: phase3Shake 0.3s ease-in-out infinite;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+body.phase3-shake .heart .inner-wrapper {
+  animation: heartPulse 0.8s infinite alternate;
+}
+
+body:not(.phase1-shake):not(.phase2-shake):not(.phase3-shake) {
+  transform: none !important;
+  animation: none !important;
+}
+
+@keyframes heartPulse {
+  0%   { transform: scale(calc(var(--scale) * 1.2)); }
+  25%  { transform: scale(calc(var(--scale) * 1.5)); }
+  50%  { transform: scale(calc(var(--scale) * 0.95)); }
+  75%  { transform: scale(calc(var(--scale) * 1.3)); }
+  100% { transform: scale(calc(var(--scale) * 1)); }
+}
+
 .heart-fragment {
-    position: absolute;            /* Định vị tuyệt đối để di chuyển tự do */
-    width: 100%;                   /* Chiều rộng bằng 100% của .inner-wrapper */
-    height: 100%;                  /* Chiều cao bằng 100% của .inner-wrapper */
-    fill: #808080;                 /* Màu xám cho mảnh vỡ */
-    stroke: #1a1a1a;               /* Viền màu đen xám */
-    stroke-width: 15px;            /* Độ dày viền là 15px */
-    animation: breakFragment 1.5s ease forwards; /* Animation vỡ kéo dài 1.5 giây, giữ trạng thái cuối */
-    transform-origin: center;      /* Điểm gốc của transform là trung tâm */
-    --angle: calc(var(--fragment-index) * 360deg / 10); /* Tính góc phân bố cho 10 mảnh (360° / 10 = 36° mỗi mảnh) */
-    --x: calc(cos(var(--angle)) * 10px); /* Tọa độ x ban đầu dựa trên cos của góc, bán kính 10px */
-    --y: calc(sin(var(--angle)) * 10px); /* Tọa độ y ban đầu dựa trên sin của góc, bán kính 10px */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: breakFragment3D 3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  animation-delay: var(--delay);
+  opacity: 0.9;
+  filter: blur(0);
+  
+  transition: fill 0.3s ease-out;
+  fill: var(--heart-fill-color, hsl(334deg, var(--lightness), 50%));
+  stroke: var(--heart-stroke-dark, hsl(334deg, var(--lightness), 25%));
+  stroke-width: 15px;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
 }
 
-/* Animation cho các mảnh vỡ */
-@keyframes breakFragment {
-    0% {
-        transform: translate(0, 0) scale(0.8) rotate(0deg); /* Bắt đầu từ tâm, thu nhỏ 80%, không xoay */
-        opacity: 1;                /* Hiển thị hoàn toàn */
-    }
-    100% {
-        transform: translate(calc(var(--x) * 5), calc(var(--y) * 5)) scale(0.5) rotate(calc(var(--fragment-index) * 60deg)); /* Di chuyển ra 50px, thu nhỏ 50%, xoay theo index */
-        /* opacity mặc định giữ nguyên là 1 vì không khai báo */
-    }
+.heart-fragment.heart-stroke {
+  fill: none;
+  stroke: var(--heart-stroke-color, rgba(255, 255, 255, 1));
+  stroke-width: 20px;
+  stroke-dasharray: 300 1206;
+  stroke-linecap: round;
+  transition: stroke 0.3s ease;
 }
 
-/* Hiệu ứng rung màn hình */
-@keyframes screenShake {
-    0% { transform: translate(0, 0); } /* Bắt đầu từ vị trí gốc */
-    10% { transform: translate(-5px, 5px); } /* Di chuyển trái 5px, lên 5px */
-    20% { transform: translate(5px, -5px); } /* Di chuyển phải 5px, xuống 5px */
-    30% { transform: translate(-5px, 5px); } /* Lặp lại */
-    40% { transform: translate(5px, -5px); } /* Lặp lại */
-    50% { transform: translate(-5px, 5px); } /* Lặp lại */
-    60% { transform: translate(5px, -5px); } /* Lặp lại */
-    70% { transform: translate(-5px, 5px); } /* Lặp lại */
-    80% { transform: translate(5px, -5px); } /* Lặp lại */
-    90% { transform: translate(-5px, 5px); } /* Lặp lại */
-    100% { transform: translate(0, 0); } /* Trở về vị trí gốc */
+.heart-fragment.heart-shine {
+  filter: blur(3px);
 }
 
-/* Áp dụng rung khi trái tim vỡ */
+@keyframes breakFragment3D {
+  0% {
+    transform:
+      rotateX(var(--rotateX))
+      rotateY(var(--rotateY))
+      translateZ(var(--initialZ))
+      scale(var(--scale-factor))
+      rotate(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+  10% {
+    transform:
+      rotateX(var(--rotateX))
+      rotateY(var(--rotateY))
+      translate3d(
+        calc(var(--tx) * 5px),
+        calc(var(--distance) * 0.1),
+        var(--initialZ)
+      )
+      scale(calc(var(--scale-factor) * 1.05))
+      rotate(calc(var(--rotation) * 0.1));
+    opacity: 0.98;
+  }
+  20% {
+    transform:
+      rotateX(var(--rotateX))
+      rotateY(var(--rotateY))
+      translate3d(
+        calc(var(--tx) * 10px),
+        calc(var(--distance) * 0.2),
+        var(--initialZ)
+      )
+      scale(calc(var(--scale-factor) * 1.1))
+      rotate(calc(var(--rotation) * 0.2));
+    opacity: 0.96;
+    filter: blur(0.4px);
+  }
+  30% {
+    transform:
+      rotateX(var(--rotateX))
+      rotateY(var(--rotateY))
+      translate3d(
+        calc(var(--tx) * 15px),
+        calc(var(--distance) * 0.3),
+        var(--initialZ)
+      )
+      scale(calc(var(--scale-factor) * 1.1))
+      rotate(calc(var(--rotation) * 0.3));
+    opacity: 0.95;
+    filter: blur(0.8px);
+  }
+  40% {
+    transform:
+      rotateX(var(--rotateX))
+      rotateY(var(--rotateY))
+      translate3d(
+        calc(var(--tx) * 20px),
+        calc(var(--distance) * 0.4),
+        var(--initialZ)
+      )
+      scale(calc(var(--scale-factor) * 1.0))
+      rotate(calc(var(--rotation) * 0.4));
+    opacity: 0.93;
+    filter: blur(1px);
+  }
+  50% {
+    transform:
+      rotateX(var(--rotateX))
+      rotateY(var(--rotateY))
+      translate3d(
+        calc(var(--tx) * 30px),
+        calc(var(--distance) * 0.5),
+        var(--initialZ)
+      )
+      scale(calc(var(--scale-factor) * 0.9))
+      rotate(calc(var(--rotation) * 0.5));
+    opacity: 0.9;
+    filter: blur(1.2px);
+  }
+  60% {
+    transform:
+      rotateX(var(--rotateX))
+      rotateY(var(--rotateY))
+      translate3d(
+        calc(var(--tx) * 40px),
+        calc(var(--distance) * 0.6),
+        var(--initialZ)
+      )
+      scale(calc(var(--scale-factor) * 0.7))
+      rotate(calc(var(--rotation) * 0.6));
+    opacity: 0.85;
+    filter: blur(1.5px);
+  }
+  70% {
+    transform:
+      rotateX(var(--rotateX))
+      rotateY(var(--rotateY))
+      translate3d(
+        calc(var(--tx) * 60px),
+        calc(var(--distance) * 0.7),
+        var(--initialZ)
+      )
+      scale(calc(var(--scale-factor) * 0.5))
+      rotate(calc(var(--rotation) * 0.7));
+    opacity: 0.8;
+    filter: blur(1.8px);
+  }
+  80% {
+    transform:
+      rotateX(var(--rotateX))
+      rotateY(var(--rotateY))
+      translate3d(
+        calc(var(--tx) * 90px),
+        calc(var(--distance) * 0.8),
+        var(--initialZ)
+      )
+      scale(calc(var(--scale-factor) * 0.3))
+      rotate(calc(var(--rotation) * 0.8));
+    opacity: 0.4;
+    filter: blur(2px);
+  }
+  90% {
+    transform:
+      rotateX(var(--rotateX))
+      rotateY(var(--rotateY))
+      translate3d(
+        calc(var(--tx) * 110px),
+        calc(var(--distance) * 0.9),
+        var(--initialZ)
+      )
+      scale(calc(var(--scale-factor) * 0.2))
+      rotate(calc(var(--rotation) * 0.9));
+    opacity: 0.2;
+    filter: blur(2.5px);
+  }
+  100% {
+    transform:
+      rotateX(var(--rotateX))
+      rotateY(var(--rotateY))
+      translate3d(
+        calc(var(--tx) * 130px),
+        var(--distance),
+        calc(var(--initialZ) - 100px)
+      )
+      scale(calc(var(--scale-factor) * 0.1))
+      rotate(var(--rotation));
+    opacity: 0;
+    filter: blur(12px);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
 body.shake {
-    animation: screenShake 1s ease; /* Chạy animation rung trong 1 giây */
-    -webkit-backface-visibility: hidden; /* Tối ưu cho Safari/iOS, tránh nhấp nháy */
-    -webkit-transform: translateZ(0); /* Kích hoạt hardware acceleration trên iOS */
-    backface-visibility: hidden;    /* Tối ưu chung, tránh nhấp nháy */
-    transform: translateZ(0);       /* Kích hoạt hardware acceleration trên Android và trình duyệt chuẩn */
+  animation: shake 0.5s ease-in-out;
 }

@@ -1,10 +1,10 @@
 .app {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
-  position: relative; /* Để chứa các phần tử absolute như .message */
+  overflow-x: hidden; 
 }
