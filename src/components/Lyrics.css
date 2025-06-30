@@ -1,14 +1,15 @@
 /* Lyrics.css */
 .lyrics-container {
-    position: fixed;
-    bottom: 12%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 85%;
-    max-width: 850px;
-    height: 180px;
+    position: absolute;
+    bottom: 100px; /* Sử dụng pixel thay vì % */
+    left: 0;
+    right: 0;
+    width: 50vw;
+    max-width: 100%;
+    height: 150px;
+    margin: 0 auto;
     overflow: hidden;
-    padding: 0 18px;
+    padding: 0 2vw;
     text-align: center;
     color: white;
     font-family: 'Montserrat', sans-serif;
@@ -23,16 +24,17 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateX(-50%) translateY(15px);
+        transform: translateY(15px);
     }
     to {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        transform: translateY(0);
     }
 }
 
@@ -43,14 +45,15 @@
     height: 100%;
     width: 100%;
     gap: 4px;
+    overflow: hidden;
 }
 
 .lyric-line {
     line-height: 1.4;
-    padding: 8px 16px;
+    padding: 8px 2vw;
     border-radius: 12px;
     transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    max-width: 100%;
+    width: 100%;
     margin: 0 auto;
     min-height: 1.4em;
     display: flex;
@@ -58,22 +61,24 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    word-break: break-word; /* Ngăn chữ tràn ra ngoài */
+    word-break: break-word;
+    overflow: hidden;
 }
 
 .lyric-line span {
     display: inline-block;
-    margin: 0 3px; /* Khoảng cách giữa các từ */
+    margin: 0 2px;
+    white-space: normal;
 }
 
 .lyric-line.inactive-line {
     opacity: 0.6;
-    font-size: 0.85em;
+    font-size: 0.9em;
     filter: blur(0.4px);
     background: rgba(80, 20, 30, 0.3);
     color: rgba(255, 200, 200, 0.8);
     text-shadow: 0 0 4px rgba(150, 40, 60, 0.3);
-    transform: scale(0.95);
+    transform: none; /* Bỏ transform scale */
 }
 
 .lyric-line.active-line {
@@ -88,19 +93,15 @@
     box-shadow:
         0 0 12px rgba(200, 40, 60, 0.5),
         inset 0 0 8px rgba(255, 120, 140, 0.25);
-    transform: scale(1.02);
+    transform: none; /* Bỏ transform scale */
     color: #fff;
 }
 
 .lyric-word {
     transition: all 0.25s ease;
     position: relative;
-    white-space: nowrap;
     line-height: 1.3;
-}
-
-.lyric-word.past {
-    color: #e8a0a8;
+    display: inline-block;
 }
 
 .lyric-word.active {
@@ -109,131 +110,42 @@
     text-shadow:
         0 0 10px rgba(255, 80, 100, 0.9),
         0 0 20px rgba(200, 40, 60, 0.7);
-    transform: scale(1.12);
     animation: lyric-pulse 0.65s ease infinite alternate;
-}
-
-.lyric-word.future {
-    color: rgba(255, 210, 210, 0.7);
-}
-
-@keyframes lyric-pulse {
-    0% {
-        transform: scale(1.05);
-        text-shadow:
-            0 0 8px rgba(255, 80, 100, 0.8),
-            0 0 16px rgba(200, 40, 60, 0.6);
-    }
-    100% {
-        transform: scale(1.15);
-        text-shadow:
-            0 0 12px rgba(255, 80, 100, 1),
-            0 0 24px rgba(200, 40, 60, 0.8);
-    }
 }
 
 /* ========== Mobile Optimization ========== */
 @media (max-width: 768px) {
     .lyrics-container {
-        bottom: 10%;
-        width: 92%;
-        max-width: 92%;
-        height: 150px;
-        padding: 0 8px;
-        font-size: 12px;
-        border-radius: 12px;
-    }
-
-    .lyrics-content {
-        gap: 3px;
-        padding: 2px 0;
+        bottom: 100px;
+        width: 96vw;
+        height: 160px;
+        padding: 0 2vw;
+        font-size: 16px;
     }
 
     .lyric-line {
-        padding: 4px 8px;
-        max-width: 98%;
-        min-height: 1.3em;
-        line-height: 1.3;
-    }
-
-    .lyric-line span {
-        margin: 0 2px; /* Giảm khoảng cách giữa các từ */
-    }
-
-    .lyric-line.active-line {
-        font-size: 1em;
-        transform: scale(1.01);
-        box-shadow: 0 0 8px rgba(200, 40, 60, 0.5);
-        padding: 5px 10px;
-    }
-
-    .lyric-line.inactive-line {
-        font-size: 0.82em;
-        opacity: 0.7;
-        transform: scale(0.95);
-        padding: 3px 7px;
-    }
-
-    .lyric-word {
-        white-space: normal;
-        display: inline;
-    }
-
-    .lyric-word.active {
-        transform: scale(1.05);
-        text-shadow:
-            0 0 6px rgba(255, 80, 100, 0.8),
-            0 0 12px rgba(200, 40, 60, 0.6);
-        animation: lyric-pulse-mobile 0.65s ease infinite alternate;
-    }
-
-    @keyframes lyric-pulse-mobile {
-        0% {
-            transform: scale(1.02);
-            text-shadow:
-                0 0 5px rgba(255, 80, 100, 0.8),
-                0 0 10px rgba(200, 40, 60, 0.6);
-        }
-        100% {
-            transform: scale(1.08);
-            text-shadow:
-                0 0 8px rgba(255, 80, 100, 1),
-                0 0 16px rgba(200, 40, 60, 0.8);
-        }
+        padding: 6px 2vw;
+        min-height: 1.5em;
+        line-height: 1.5;
     }
 }
 
 @media (max-width: 480px) {
     .lyrics-container {
-        bottom: 8%;
+        bottom: 80px; /* Điều chỉnh cho phù hợp với bàn phím mobile */
         height: 140px;
         font-size: 10px;
     }
 
     .lyric-line {
-        padding: 3px 6px;
-        max-width: 99%;
-    }
-
-    .lyric-line span {
-        margin: 0 1px;
-    }
-
-    .lyric-line.active-line {
-        font-size: 0.95em;
-        padding: 4px 8px;
-    }
-
-    .lyric-line.inactive-line {
-        font-size: 0.78em;
+        padding: 5px 2vw;
     }
 }
 
-.empty-line {
-    visibility: hidden;
+/* Ngăn chặn scroll toàn trang khi chạm vào lyrics container */
+body.lyrics-active {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
     height: 100%;
-    min-height: 1.3em;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
 }

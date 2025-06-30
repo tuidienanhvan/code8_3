@@ -22,17 +22,6 @@ body {
   position: relative;
   z-index: 5;
   -webkit-tap-highlight-color: transparent;
-  transition: opacity 0.5s ease;
-}
-
-.heart.broken {
-  pointer-events: none;
-  opacity: 0;
-  cursor: default;
-}
-
-.heart:disabled {
-  cursor: default;
 }
 
 .heart::after {
@@ -63,6 +52,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
+/* Ẩn hoàn toàn bóng khi tim vỡ */
 .heart.broken::after {
   opacity: 0;
   transition: opacity 3s ease;
@@ -135,6 +125,11 @@ body {
   transform-style: preserve-3d;
 }
 
+/* ==================== */
+/* HIỆU ỨNG SHAKE CHI TIẾT */
+/* ==================== */
+
+/* Giai đoạn 1: Rung nhẹ không xoay */
 @keyframes phase1Shake {
   0%, 100% { transform: translate(0, 0); }
   10% { transform: translate(-2px, -1px); }
@@ -152,6 +147,7 @@ body.phase1-shake {
   animation: phase1Shake 0.5s ease-in-out infinite;
 }
 
+/* Giai đoạn 2: Rung mạnh hơn với xoay nhẹ */
 @keyframes phase2Shake {
   0%, 100% { transform: translate(0, 0) rotate(0); }
   10% { transform: translate(-4px, -2px) rotate(-1deg); }
@@ -170,6 +166,7 @@ body.phase2-shake {
   animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
+/* Giai đoạn 3: Rung rất mạnh với xoay nhiều và phồng to */
 @keyframes phase3Shake {
   0%, 100% { transform: translate(0, 0) rotate(0); }
   10% { transform: translate(-8px, -4px) rotate(-3deg); }
@@ -197,6 +194,7 @@ body:not(.phase1-shake):not(.phase2-shake):not(.phase3-shake) {
   animation: none !important;
 }
 
+/* Hiệu ứng nhịp tim: scale nhỏ-lớn-nhỏ */
 @keyframes heartPulse {
   0%   { transform: scale(calc(var(--scale) * 1.2)); }
   25%  { transform: scale(calc(var(--scale) * 1.5)); }
@@ -204,6 +202,10 @@ body:not(.phase1-shake):not(.phase2-shake):not(.phase3-shake) {
   75%  { transform: scale(calc(var(--scale) * 1.3)); }
   100% { transform: scale(calc(var(--scale) * 1)); }
 }
+
+/* ==================== */
+/* HIỆU ỨNG VỠ TIM CHI TIẾT (TỪ TRƯỚC XUỐNG SAU) */
+/* ==================== */
 
 .heart-fragment {
   position: absolute;
@@ -216,13 +218,13 @@ body:not(.phase1-shake):not(.phase2-shake):not(.phase3-shake) {
   opacity: 0.9;
   filter: blur(0);
   
+  /* Giữ nguyên style của heart-layer */
   transition: fill 0.3s ease-out;
   fill: var(--heart-fill-color, hsl(334deg, var(--lightness), 50%));
   stroke: var(--heart-stroke-dark, hsl(334deg, var(--lightness), 25%));
   stroke-width: 15px;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
 }
-
 .heart-fragment.heart-stroke {
   fill: none;
   stroke: var(--heart-stroke-color, rgba(255, 255, 255, 1));
@@ -378,16 +380,17 @@ body:not(.phase1-shake):not(.phase2-shake):not(.phase3-shake) {
       rotateY(var(--rotateY))
       translate3d(
         calc(var(--tx) * 130px),
-        var(--distance),
-        calc(var(--initialZ) - 100px)
+        var(--distance), /* 100% khoảng cách */
+        calc(var(--initialZ) - 100px) /* Giảm depth khi rơi */
       )
       scale(calc(var(--scale-factor) * 0.1))
       rotate(var(--rotation));
     opacity: 0;
-    filter: blur(12px);
+    filter: blur(12px); /* Tăng blur khi biến mất */
   }
 }
 
+/* Hiệu ứng shake khi reset */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
