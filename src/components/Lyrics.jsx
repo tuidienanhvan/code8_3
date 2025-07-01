@@ -19,8 +19,8 @@ const Lyrics = ({ audioRef, isPlaying }) => {
     { time: "00:00:00:57", text: "khi" },
     { time: "00:00:01:14", text: "cạnh" },
     { time: "00:00:01:32", text: "bên" },
-    { time: "00:00:01:50", text: "anh," },
-    { time: "00:00:02:06", text: "em" },
+    { time: "00:00:01:50", text: "anh" },
+    { time: "00:00:02:06", text: "Em" },
     { time: "00:00:02:24", text: "không" },
     { time: "00:00:02:41", text: "cần" },
     { time: "00:00:02:59", text: "che" },
@@ -35,8 +35,8 @@ const Lyrics = ({ audioRef, isPlaying }) => {
     { time: "00:00:05:30", text: "đi," },
     { time: "00:00:05:50", text: "đừng" },
     { time: "00:00:06:03", text: "suy" },
-    { time: "00:00:06:23", text: "nghĩ," },
-    { time: "00:00:06:51", text: "điều" },
+    { time: "00:00:06:23", text: "nghĩ" },
+    { time: "00:00:06:51", text: "Điều" },
     { time: "00:00:07:13", text: "em" },
     { time: "00:00:07:28", text: "muốn" },
     { time: "00:00:07:47", text: "là" },
@@ -52,7 +52,7 @@ const Lyrics = ({ audioRef, isPlaying }) => {
     { time: "00:00:10:52", text: "trời" },
     { time: "00:00:11:10", text: "mỗi" },
     { time: "00:00:11:26", text: "sáng" },
-    { time: "00:00:11:40", text: "chẳng" },
+    { time: "00:00:11:40", text: "Chẳng" },
     { time: "00:00:11:59", text: "còn" },
     { time: "00:00:12:15", text: "chiếu" },
     { time: "00:00:12:34", text: "soi" },
@@ -65,8 +65,8 @@ const Lyrics = ({ audioRef, isPlaying }) => {
     { time: "00:00:14:33", text: "mặc" },
     { time: "00:00:14:49", text: "kệ" },
     { time: "00:00:15:09", text: "đi" },
-    { time: "00:00:15:23", text: "chớ," },
-    { time: "00:00:15:59", text: "điều" },
+    { time: "00:00:15:23", text: "chớ" },
+    { time: "00:00:15:59", text: "Điều" },
     { time: "00:00:16:17", text: "anh" },
     { time: "00:00:16:36", text: "muốn" },
     { time: "00:00:16:52", text: "là" },
@@ -85,8 +85,8 @@ const Lyrics = ({ audioRef, isPlaying }) => {
     { time: "00:00:20:18", text: "em" },
     { time: "00:00:20:26", text: "say" },
     { time: "00:00:20:50", text: "thật" },
-    { time: "00:00:21:07", text: "say," },
-    { time: "00:00:21:38", text: "yêu" },
+    { time: "00:00:21:07", text: "say" },
+    { time: "00:00:21:38", text: "Yêu" },
     { time: "00:00:21:58", text: "từ" },
     { time: "00:00:22:11", text: "lúc" },
     { time: "00:00:22:30", text: "mình" },
@@ -101,8 +101,8 @@ const Lyrics = ({ audioRef, isPlaying }) => {
     { time: "00:00:24:44", text: "ngọt" },
     { time: "00:00:25:01", text: "hơn" },
     { time: "00:00:25:19", text: "trời" },
-    { time: "00:00:25:36", text: "mây," },
-    { time: "00:00:26:07", text: "quên" },
+    { time: "00:00:25:36", text: "mây" },
+    { time: "00:00:26:07", text: "Quên" },
     { time: "00:00:26:28", text: "hết" },
     { time: "00:00:26:44", text: "đi" },
     { time: "00:00:27:01", text: "bao" },
@@ -116,8 +116,8 @@ const Lyrics = ({ audioRef, isPlaying }) => {
     { time: "00:00:29:18", text: "ta" },
     { time: "00:00:29:34", text: "tới" },
     { time: "00:00:29:51", text: "muôn" },
-    { time: "00:00:30:05", text: "lối," },
-    { time: "00:00:30:40", text: "đưa" },
+    { time: "00:00:30:05", text: "lối" },
+    { time: "00:00:30:40", text: "Đưa" },
     { time: "00:00:30:54", text: "vầng" },
     { time: "00:00:31:14", text: "dương" },
     { time: "00:00:31:36", text: "cùng" },
@@ -132,8 +132,8 @@ const Lyrics = ({ audioRef, isPlaying }) => {
     { time: "00:00:33:44", text: "dần" },
     { time: "00:00:34:02", text: "trôi" },
     { time: "00:00:34:22", text: "chậm" },
-    { time: "00:00:34:43", text: "trôi," },
-    { time: "00:00:35:13", text: "vẫn" },
+    { time: "00:00:34:43", text: "trôi" },
+    { time: "00:00:35:13", text: "Vẫn" },
     { time: "00:00:35:31", text: "cứ" },
     { time: "00:00:35:49", text: "bên" },
     { time: "00:00:36:04", text: "nhau" },
@@ -148,8 +148,8 @@ const Lyrics = ({ audioRef, isPlaying }) => {
     { time: "00:00:38:22", text: "ta" },
     { time: "00:00:38:35", text: "chưa" },
     { time: "00:00:38:53", text: "đặt" },
-    { time: "00:00:39:11", text: "tên," },
-    { time: "00:00:39:42", text: "ngắm" },
+    { time: "00:00:39:11", text: "tên" },
+    { time: "00:00:39:42", text: "Ngắm" },
     { time: "00:00:39:59", text: "khoảnh" },
     { time: "00:00:40:16", text: "khắc" },
     { time: "00:00:40:34", text: "ban" },
@@ -163,8 +163,8 @@ const Lyrics = ({ audioRef, isPlaying }) => {
     { time: "00:00:42:30", text: "sát" },
     { time: "00:00:42:52", text: "bên" },
     { time: "00:00:43:13", text: "khu" },
-    { time: "00:00:43:27", text: "rừng," },
-    { time: "00:00:43:43", text: "vượt" },
+    { time: "00:00:43:27", text: "rừng" },
+    { time: "00:00:43:43", text: "Vượt" },
     { time: "00:00:44:01", text: "qua" },
     { time: "00:00:44:17", text: "hết" },
     { time: "00:00:44:38", text: "núi" },
@@ -181,8 +181,8 @@ const Lyrics = ({ audioRef, isPlaying }) => {
     { time: "00:00:47:23", text: "thêm" },
     { time: "00:00:47:41", text: "bao" },
     { time: "00:00:47:59", text: "bài" },
-    { time: "00:00:48:18", text: "ca," },
-    { time: "00:00:48:47", text: "tay" },
+    { time: "00:00:48:18", text: "ca" },
+    { time: "00:00:48:47", text: "Tay" },
     { time: "00:00:49:00", text: "nàng" },
     { time: "00:00:49:16", text: "dắt" },
     { time: "00:00:49:40", text: "theo" },
@@ -208,21 +208,57 @@ const Lyrics = ({ audioRef, isPlaying }) => {
   }));
 
   // Nhóm các từ thành dòng
-  const lines = [
-    [0, 12],    // Dòng 1
-    [13, 25],   // Dòng 2
-    [26, 38],   // Dòng 3
-    [39, 51],   // Dòng 4
-    [52, 69],   // Dòng 5
-    [70, 82],   // Dòng 6
-    [83, 96],   // Dòng 7
-    [97, 109],  // Dòng 8
-    [110, 124], // Dòng 9
-    [125, 139], // Dòng 10
-    [140, 153], // Dòng 11
-    [154, 163],  // Dòng 12
-    [164,166] // Dòng 13
-  ];
+const lines = [
+    // Dòng 1 (chia làm 2)
+    [0, 4],     // "Mỗi khi cạnh bên anh, em không cần"
+    [5, 12],    // "che giấu đi ước mơ"
+    
+    // Dòng 2 (chia làm 2)
+    [13, 18],   // "Cứ nói đi, đừng suy nghĩ, điều em"
+    [19, 25],   // "muốn là điều anh mong"
+    
+    // Dòng 3 (chia làm 2)
+    [26, 32],   // "Đến bao giờ mặt trời mỗi sáng"
+    [33, 38],   // "chẳng còn chiếu soi nơi đây"
+    
+    // Dòng 4 (chia làm 2)
+    [39, 44],   // "Thì cũng mặc kệ đi chớ, điều"
+    [45, 51],   // "anh muốn là làm em vui"
+    
+    // Dòng 5 (chia làm 3 phần do quá dài)
+    [52, 62],   // "Bởi vì anh đã yêu đôi mắt em"
+    [63, 69],   // "say thật say, yêu từ lúc mình tay cầm tay"
+    
+    // Dòng 6 (chia làm 2)
+    [70, 76],   // "Yêu nụ hôn ngọt hơn trời mây,"
+    [77, 82],   // "quên hết đi bao đêm ngày"
+    
+    // Dòng 7 (chia làm 2)
+    [83, 89],   // "Ánh trăng dẫn ta tới muôn lối,"
+    [90, 96],   // "đưa vầng dương cùng em dạo chơi"
+    
+    // Dòng 8 (chia làm 2)
+    [97, 103],  // "Sông thời gian dần trôi chậm trôi,"
+    [104, 109], // "vẫn cứ bên nhau như vậy"
+    
+    // Dòng 9 (chia làm 2)
+    [110, 117], // "Đi qua vùng đất ta chưa đặt tên,"
+    [118, 124], // "ngắm khoảnh khắc ban mai vừa lên"
+    
+    // Dòng 10 (chia làm 2)
+    [125, 130], // "Con đường sát bên khu rừng, vượt qua"
+    [131, 139], // "hết núi cao đến nơi lâu đài"
+    
+    // Dòng 11 (chia làm 2)
+    [140, 146], // "Ta lại hát thêm bao bài ca,"
+    [147, 153], // "tay nàng dắt theo muôn loài hoa"
+    
+    // Dòng 12 (giữ nguyên do đã ngắn)
+    [154, 163], // "Trong từng phút giây thiên đàng, em à, có hay?"
+    
+    // Dòng 13 (giữ nguyên)
+    [164, 166]  // "Ná-na-na-nà"
+];
 
   useEffect(() => {
         // Khởi tạo visibleLines với 3 dòng (dòng đầu tiên ở giữa)

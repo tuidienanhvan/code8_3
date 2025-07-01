@@ -156,6 +156,13 @@ const Heart = ({ love, setLove, onPrevLoveChange, triggerBreak, onBreakStatusCha
   const offset = (Math.atan2(y, x) / Math.PI) * (PATH_LENGTH / 2) + PATH_LENGTH / 2;
   const shakeTimeout = useRef(null);
   const isShaking = useRef(false);
+  const [shineX, setShineX] = useState(0.5);
+  const [shineOpacity, setShineOpacity] = useState(0.5);
+  
+  // State cho hiệu ứng love = 1
+  const [autoOffset, setAutoOffset] = useState(0);
+  const [randomTilt, setRandomTilt] = useState([0, 0]);
+  const [pulseScale, setPulseScale] = useState(1);
 
   useDocumentEvent("mouseup", () => {
     if (!pressed) return;
@@ -166,21 +173,68 @@ const Heart = ({ love, setLove, onPrevLoveChange, triggerBreak, onBreakStatusCha
     if (isBroken) return;
     setPressed(true);
   
-    const newLove = love + 1;
+    const newLove = love + 0.1;
     const updatedLove = newLove > 1 ? 0 : newLove;
     const roundedLove = Number(updatedLove.toFixed(1));
   
-    setLove(roundedLove); // ✅ Truyền giá trị cụ thể vào props
+    setLove(roundedLove);
     add(1000);
   };  
 
+  // Hiệu ứng đặc biệt khi love = 1
+  const isLoveFull = love === 1 && !isBroken;
+
   useEffect(() => {
+    if (isLoveFull) {
+      // Random tilt effect
+      const tiltInterval = setInterval(() => {
+        const newX = (Math.random() * 50) - 25;
+        const newY = (Math.random() * 50) - 25;
+        setRandomTilt([newX, newY]);
+      }, 3000);
+      
+      // Pulse scale effect
+      const pulseInterval = setInterval(() => {
+        setPulseScale(1.05);
+        setTimeout(() => setPulseScale(1), 500);
+      }, 2000);
+      
+      // Auto offset for stroke effect - CHỈ KHI LOVE = 1
+      const offsetInterval = setInterval(() => {
+        setAutoOffset(prev => (prev + 20) % PATH_LENGTH);
+      }, 100);
+
+      const shineInterval = setInterval(() => {
+        setShineX(Math.random());
+        setShineOpacity(Math.random() * 0.5 + 0.3);
+      }, 500); // 2 giây đổi 1 lần
+      
+      return () => {
+        clearInterval(tiltInterval);
+        clearInterval(pulseInterval);
+        clearInterval(offsetInterval);
+        clearInterval(shineInterval)
+      };
+    } else {
+      // Reset các hiệu ứng khi love không bằng 1
+      setRandomTilt([0, 0]);
+      setPulseScale(1);
+      setAutoOffset(0);
+    }
+  }, [isLoveFull]);
+
+  useEffect(() => {
+    // SỬA LỖI: Cập nhật màu sắc theo biến love
+    const lightness = love === 0 ? -50 : love * 80 + 20;
+    document.documentElement.style.setProperty("--lightness", `${lightness}%`);
+    
     document.body.style.backgroundImage = love === 0 
       ? "radial-gradient(circle, #333, #000)" 
       : "radial-gradient(circle, #edc9db, #f391c3)";
-    document.documentElement.style.setProperty("--heart-stroke-color", love === 0 ? "#808080" : "rgba(255, 255, 255, 1)");
-    document.documentElement.style.setProperty("--heart-fill-color", love === 0 ? "#000000" : "hsl(334deg, var(--lightness), 50%)");
-    document.documentElement.style.setProperty("--heart-stroke-dark", love === 0 ? "#1a1a1a" : "hsl(334deg, var(--lightness), 25%)");
+    
+    // SỬA LỖI: Cập nhật màu viền và màu nền chính xác
+    document.documentElement.style.setProperty("--heart-stroke-color", love === 0 ? "#1a1a1a" : "rgba(255, 255, 255, 1)");
+    document.documentElement.style.setProperty("--heart-stroke-dark", love === 0 ? "rgba(0, 0, 2 ,1)" : `hsl(334deg, ${lightness}%, 25%)`);
     document.documentElement.style.setProperty("--shadow-color", love === 0 ? "rgba(26, 26, 26, 0.6)" : "hsla(334, 40%, 50%, 0.4)");
   
     if (triggerBreak && !isShaking.current && !isBroken) {
@@ -232,14 +286,20 @@ const Heart = ({ love, setLove, onPrevLoveChange, triggerBreak, onBreakStatusCha
     };
   }, [love, prevLove, triggerBreak, onPrevLoveChange, onBreakStatusChange, isBroken]);
 
+  // Xác định rotation và offset dựa trên trạng thái
+  const currentRotate = isLoveFull ? randomTilt : [x, y];
+  const currentOffset = isLoveFull ? autoOffset : offset;
+  
+  // Tính toán scale với hiệu ứng pulse chỉ khi love = 1
+  const scaleValue = (0.8 + love * 0.5 - pressed * 0.1) * (isLoveFull ? pulseScale : 1);
+
   return (
     <button 
-      className={`heart ${isBroken ? "broken" : ""}`}
+      className={`heart ${isBroken ? "broken" : ""} ${isLoveFull ? "love-full" : ""}`}
       onMouseDown={handleMouseDown} 
       ref={ref} 
       style={{
-        "--lightness": `${love * 80 + 20}%`,
-        "--scale": 0.8 + love * 0.5 - pressed * 0.1,
+        "--scale": scaleValue,
         pointerEvents: isBroken ? 'none' : 'auto'
       }}
       disabled={isBroken}
@@ -249,23 +309,23 @@ const Heart = ({ love, setLove, onPrevLoveChange, triggerBreak, onBreakStatusCha
         {isBroken ? (
           <>
             {[...Array(LAYERS)].map((_, layer) => (
-              <HeartFragment key={layer} layer={layer} rotate={[x, y]} />
+              <HeartFragment key={layer} layer={layer} rotate={currentRotate} />
             ))}
             <HeartFragment 
               key="shine" 
               layer={LAYERS} 
-              rotate={[x, y]} 
+              rotate={currentRotate} 
               isShine 
-              shineX={y / 50 + 0.5} 
-              shineOpacity={x / 200 + 0.5}
+              shineX={isLoveFull ? Math.random() : y / 50 + 0.5} 
+              shineOpacity={isLoveFull ? Math.random() * 0.5 + 0.3 : x / 200 + 0.5}
               syncWithLayer={LAYERS - 1}
             />
             <HeartFragment 
               key="stroke" 
               layer={LAYERS} 
-              rotate={[x, y]} 
+              rotate={currentRotate} 
               isStroke 
-              strokeDashoffset={offset}
+              strokeDashoffset={currentOffset}
               syncWithLayer={LAYERS - 1}
             />
           </>
@@ -273,11 +333,45 @@ const Heart = ({ love, setLove, onPrevLoveChange, triggerBreak, onBreakStatusCha
           <>
             <Splash circles={items}/>
             {[...new Array(LAYERS)].map((_, i) => (
-              <HeartSVG key={i} className="heart-layer" rotate={{x, y}} translateZ={i * LAYER_GAP} scale={Math.sin((i / LAYERS)*Math.PI)/10 + 1}/>
+              <HeartSVG 
+                key={i} 
+                className="heart-layer" 
+                rotate={{x: currentRotate[0], y: currentRotate[1]}} 
+                translateZ={i * LAYER_GAP} 
+                scale={Math.sin((i / LAYERS)*Math.PI)/10 + 1}
+              />
             ))}
-            <ShineSVG x={y / 50 + 0.5} opacity={x / 200 + 0.5} rotate={{x, y}} translateZ={(LAYERS + 1) * LAYER_GAP}/>
-            <HeartSVG className="heart-stroke" rotate={{x, y}} translateZ={(LAYERS + 1) * LAYER_GAP} strokeDashoffset={offset} scale={0.9}/>
+            <ShineSVG 
+              x={isLoveFull ? shineX : y / 50 + 0.5} 
+              opacity={isLoveFull ? shineOpacity : x / 200 + 0.5} 
+              rotate={{x: currentRotate[0], y: currentRotate[1]}} 
+              translateZ={(LAYERS + 1) * LAYER_GAP}
+            />
+            <HeartSVG 
+              className="heart-stroke" 
+              rotate={{x: currentRotate[0], y: currentRotate[1]}} 
+              translateZ={(LAYERS + 1) * LAYER_GAP} 
+              strokeDashoffset={currentOffset} 
+              scale={0.9}
+            />
           </>
+        )}
+        
+        {/* Hiệu ứng kim tuyến chỉ khi love = 1 */}
+        {isLoveFull && (
+          <div className="love-sparkles">
+            {[...Array(10)].map((_, i) => (
+              <div 
+                key={i} 
+                className="sparkle-particle"
+                style={{
+                  animationDelay: `${i * 0.2}s`,
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+              />
+            ))}
+          </div>
         )}
       </div>
     </button>
